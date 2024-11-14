@@ -5,14 +5,16 @@ import { roundUp } from './utls/money.js';
 let cartSummarryHtml = '';
 
 cart.forEach((cartItem)=>{
-    const productId = cartItem.productid;
+    const productId = cartItem.productId;
 
     let matchingproduct;
+
     products.forEach((product)=>{
         if ( product.id === productId) {
             matchingproduct = product;
              }
     });
+    
  
 cartSummarryHtml += `  <div class="cart-item-container js-${matchingproduct.id}">
             <div class="delivery-date">
@@ -92,16 +94,15 @@ cartSummarryHtml += `  <div class="cart-item-container js-${matchingproduct.id}"
           </div>
 `;
 });
+
+
 document.querySelector('.jsc').innerHTML = cartSummarryHtml;
 
 document.querySelectorAll('.js-delete-link').forEach((link)=>{
     link.addEventListener('click', ()=>{
         const productId = link.dataset.productId;
         removeProduct(productId);
-        
 const container = document.querySelector(`.js-${productId}`);
 container.remove();
     });
 });
-
-console.log(cart);

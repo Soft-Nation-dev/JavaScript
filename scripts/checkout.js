@@ -1,6 +1,12 @@
 import {cart, removeProduct} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { roundUp } from './utls/money.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+
+let today = dayjs();
+const deliveryDate = today.add(7, 'days');
+console.log(deliveryDate.format('dddd, MMMM D'));
+
 
 let cartSummarryHtml = '';
 
@@ -106,3 +112,4 @@ const container = document.querySelector(`.js-${productId}`);
 container.remove();
     });
 });
+ 

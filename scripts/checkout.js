@@ -1,2 +1,5 @@
-import {updatePage} from './ordersummary.js';
-updatePage();
+import { updatesOdersSumarry } from "./checkoutpage/ordersummary.js";
+import { updatePaymentSumarry } from "./checkoutpage/paymentsummarry.js";
+
+updatesOdersSumarry();
+updatePaymentSumarry();

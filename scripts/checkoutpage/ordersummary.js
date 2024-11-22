@@ -4,7 +4,7 @@ import { products, getProduct } from '../../data/products.js';
 import {roundUp} from '../utls/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/dilveryoptions.js';
-
+import { updatePaymentSumarry } from './paymentsummarry.js';
 export function updatesOdersSumarry (){
 
 let cartSummarryHtml = '';
@@ -17,7 +17,7 @@ cart.forEach((cartItem)=>{
 
  const deliveryOptionId = cartItem.deliveryOptionId;
  const deliveryOption = getDeliveryOption(deliveryOptionId);
- 
+
 const today = dayjs();
     const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
     const dateString = deliveryDate.format('dddd, MMMM D');
@@ -101,6 +101,7 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
     link.addEventListener('click', ()=>{
         const productId = link.dataset.productId;
         removeProduct(productId);
+        updatePaymentSumarry();
 const container = document.querySelector(`.js-${productId}`);
 container.remove();
     });
@@ -110,6 +111,7 @@ container.remove();
     const {productId, deliveryOptionId} = element.dataset;
     updateDeliveryOption(productId, deliveryOptionId);
     updatesOdersSumarry();
+    updatePaymentSumarry();
   })
  })
 }

@@ -24,27 +24,27 @@ const paymentSummarryHtml = ` <div class="payment-summary-title">
 
           <div class="payment-summary-row">
             <div>Items (3):</div>
-            <div class="payment-summary-money">${roundUp(productPriceCents)}</div>
+            <div class="payment-summary-money">$${roundUp(productPriceCents)}</div>
           </div>
 
           <div class="payment-summary-row">
             <div>Shipping &amp; handling:</div>
-            <div class="payment-summary-money">${roundUp(shippingPrice)}</div>
+            <div class="payment-summary-money">$${roundUp(shippingPrice)}</div>
           </div>
 
           <div class="payment-summary-row subtotal-row">
             <div>Total before tax:</div>
-            <div class="payment-summary-money">${roundUp(priceTax)}</div>
+            <div class="payment-summary-money">$${roundUp(priceTax)}</div>
           </div>
 
           <div class="payment-summary-row">
             <div>Estimated tax (10%):</div>
-            <div class="payment-summary-money">${roundUp(taxCents)}</div>
+            <div class="payment-summary-money">$${roundUp(taxCents)}</div>
           </div>
 
           <div class="payment-summary-row total-row">
             <div>Order total:</div>
-            <div class="payment-summary-money">${roundUp(totatCents)}</div>
+            <div class="payment-summary-money">$${roundUp(totatCents)}</div>
           </div>
 
           <button class="place-order-button button-primary">

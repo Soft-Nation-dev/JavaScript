@@ -1,7 +1,17 @@
-export let cart = JSON.parse(localStorage.getItem('cart'));
+ class Cart {
 
-if (!cart){
-  cart = [{
+cartItem;
+localStorageKey;
+
+constructor (){
+  this.localStorageKey = 'cart';
+  this.loadFromStorage();
+}
+loadFromStorage (){
+this.cartItem =  JSON.parse(localStorage.getItem(this,this.localStorageKey));
+
+if (!this.cartItem){
+  this.cartItem = [{
     productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
     quantity: 2,
     deliveryOptionId: '1'
@@ -12,15 +22,16 @@ if (!cart){
      deliveryOptionId: '2'
   }];
 }
-
-function saveToStorage (){
-localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-export function addToCart (productId){
+aveToStorage (){
+localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItem));
+}
+
+addToCart (productId){
   let matchingId;
 
-  cart.forEach((cartItem)=>{
+  this.cartItem.forEach((cartItem)=>{
     if (productId === cartItem.productId){
     matchingId = cartItem;
     }
@@ -29,7 +40,7 @@ export function addToCart (productId){
   if (matchingId){
     matchingId.quantity += 1;
   } else {
-    cart.push({
+    this.cartItem.push({
       productId: productId,
       quantity:1,
       deliveryOptionid: '1'
@@ -38,21 +49,21 @@ export function addToCart (productId){
   saveToStorage();
   }
 
- export function removeProduct(productId){
+ removeProduct(productId){
     const newArray = [];
-   cart.forEach((cartItem)=>{
+   this.cartItem.forEach((cartItem)=>{
     if (cartItem.productId !== productId){
       newArray.push(cartItem);
     }
    });
-   cart = newArray;
+   this.cartItem = newArray;
    saveToStorage();
   }
 
-  export function updateDeliveryOption(productId, deliveryOptionId){
+  updateDeliveryOption(productId, deliveryOptionId){
     let matchingItem;
 
-    cart.forEach((cartItem)=>{
+    this.cartItem.forEach((cartItem)=>{
         if ( productId === cartItem.productId) {
             matchingItem = cartItem;
              }
@@ -60,3 +71,7 @@ export function addToCart (productId){
     matchingItem.deliveryOptionId = deliveryOptionId;
     saveToStorage();
   }
+}
+
+export const cart = new Cart();
+console.log(cart);

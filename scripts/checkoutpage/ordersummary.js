@@ -1,5 +1,5 @@
 
-import { cart,  removeProduct, updateDeliveryOption } from '../../data/cart.js';
+import { cart } from '../../data/cart.js';
 import { products, getProduct } from '../../data/products.js';
 import {roundUp} from '../utls/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
@@ -9,7 +9,7 @@ export function updatesOdersSumarry (){
 
 let cartSummarryHtml = '';
 
-cart.forEach((cartItem)=>{
+cart.cartItem.forEach((cartItem)=>{
     const productId = cartItem.productId;
 
     const matchingproduct = getProduct(productId);

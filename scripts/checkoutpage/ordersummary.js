@@ -100,7 +100,7 @@ document.querySelector('.jsc').innerHTML = cartSummarryHtml;
 document.querySelectorAll('.js-delete-link').forEach((link)=>{
     link.addEventListener('click', ()=>{
         const productId = link.dataset.productId;
-        removeProduct(productId);
+        cart.removeProduct(productId);
         updatePaymentSumarry();
 const container = document.querySelector(`.js-${productId}`);
 container.remove();
@@ -109,7 +109,7 @@ container.remove();
  document.querySelectorAll('.js-delivery-option').forEach((element)=>{
   element.addEventListener('click', ()=>{
     const {productId, deliveryOptionId} = element.dataset;
-    updateDeliveryOption(productId, deliveryOptionId);
+    cart.updateDeliveryOption(productId, deliveryOptionId);
     updatesOdersSumarry();
     updatePaymentSumarry();
   })

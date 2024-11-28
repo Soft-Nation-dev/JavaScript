@@ -1,14 +1,14 @@
  class Cart {
 
 cartItem;
-localStorageKey;
+#localStorageKey;
 
 constructor (){
-  this.localStorageKey = 'cart';
-  this.loadFromStorage();
+  this.#localStorageKey = 'cart';
+  this.#loadFromStorage();
 }
-loadFromStorage (){
-this.cartItem =  JSON.parse(localStorage.getItem(this,this.localStorageKey));
+#loadFromStorage (){
+this.cartItem =  JSON.parse(localStorage.getItem(this.#localStorageKey));
 
 if (!this.cartItem){
   this.cartItem = [{
@@ -24,8 +24,8 @@ if (!this.cartItem){
 }
 }
 
-aveToStorage (){
-localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItem));
+saveToStorage (){
+localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItem));
 }
 
 addToCart (productId){
@@ -45,8 +45,8 @@ addToCart (productId){
       quantity:1,
       deliveryOptionid: '1'
     })
-  }
-  saveToStorage();
+  };
+  this.saveToStorage();
   }
 
  removeProduct(productId){
@@ -57,7 +57,7 @@ addToCart (productId){
     }
    });
    this.cartItem = newArray;
-   saveToStorage();
+   this.saveToStorage();
   }
 
   updateDeliveryOption(productId, deliveryOptionId){
@@ -69,9 +69,16 @@ addToCart (productId){
              }
     });
     matchingItem.deliveryOptionId = deliveryOptionId;
-    saveToStorage();
+    this.saveToStorage();
+  }
+
+  updateCartQuantity() {
+    let cartQantity = 0;
+      cart.cartItem.forEach((cartItem) => {
+          cartQantity += cartItem.quantity;
+      });
+     return cartQantity;
   }
 }
 
 export const cart = new Cart();
-console.log(cart);

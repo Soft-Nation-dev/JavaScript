@@ -1,4 +1,4 @@
-import {cart, addToCart} from '../data/cart.js'
+import {cart} from '../data/cart.js'
 import {products} from '../data/products.js'
 import { roundUp } from './utls/money.js';
 
@@ -55,25 +55,23 @@ productsHtml += `
             Add to Cart
           </button>
         </div> `;
+        const cartqaun = cart.updateCartQuantity();
+        document.querySelector('.js-cart-quantity').innerHTML = cartqaun;
 })
 
 document.querySelector('.js-product').innerHTML = productsHtml;
+// const cartQ = document.querySelector('.js-cart-quantity').innerHTML;
 
-export function updateCartQuantity() {
-  let cartQantity = 0;
-    cart.forEach((cartItem) => {
-        cartQantity += cartItem.quantity;
-    });
-   document.querySelector('.js-cart-quantity').innerHTML = cartQantity; 
-}
+
 
 
 document.querySelectorAll('.js-add-to-cart-button').forEach((button)=>{
   button.addEventListener('click', ()=>{
     const productId = button.dataset.productId;
-    addToCart(productId);
-    updateCartQuantity();
-    console.log(cart);
+    cart.addToCart(productId);
+    cart.updateCartQuantity();
+    const cartqaun = cart.updateCartQuantity();
+    document.querySelector('.js-cart-quantity').innerHTML = cartqaun;
   });
 });
 

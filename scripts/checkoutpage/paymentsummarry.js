@@ -7,7 +7,7 @@ export function updatePaymentSumarry (){
     let productPriceCents = 0;
     let shippingPrice = 0;
 
-cart.forEach((cartItem) => {
+cart.cartItem.forEach((cartItem) => {
    const product = getProduct(cartItem.productId)
    productPriceCents += product.priceCents * cartItem.quantity;
 
@@ -17,13 +17,12 @@ cart.forEach((cartItem) => {
 const priceTax = productPriceCents + shippingPrice;
 const taxCents = priceTax * 0.1;
 const totatCents = priceTax + taxCents;
-
 const paymentSummarryHtml = ` <div class="payment-summary-title">
             Order Summary
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div class="pay">Items ():</div>
             <div class="payment-summary-money">$${roundUp(productPriceCents)}</div>
           </div>
 
@@ -47,10 +46,33 @@ const paymentSummarryHtml = ` <div class="payment-summary-title">
             <div class="payment-summary-money">$${roundUp(totatCents)}</div>
           </div>
 
-          <button class="place-order-button button-primary">
+          <button class="place-order-button button-primary
+          js-place-order-button">
             Place your order
           </button>`;
 
+
+
 document.querySelector('.js-payment-summarry').innerHTML = paymentSummarryHtml;
 
+const cartqaun = cart.updateCartQuantity();
+      document.querySelector('.pay').textContent = `Items(${cartqaun})`;
+      document.querySelector('.checkout').textContent = `${cartqaun} Items`;
+
+      document.querySelector('.js-place-order-button').addEventListener('click', async ()=>{
+      /*const respone =  await fetch('https://supersimplebackend.dev/orders', {
+          method: 'Post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify( {
+            cart: cart
+          })
+          });
+         const orders = await respone.json()
+         console.log(orders);*/
+        window.location.href = 'orders.html';
+
+        });
 }
+
